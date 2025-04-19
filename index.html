@@ -109,7 +109,13 @@
 
     <script>
     function aceptar() {
-        window.location.href = "https://formsubmit.co/sotopaolo21@gmail.com?name=Anuska&message=¡Sí%20acepto%20ser%20tu%20novia!";
+         document.body.innerHTML = `
+        <h1>¡Gracias por decir que sí, mi amor! 💍💕</h1>
+        <img src="https://i.imgur.com/4M7IWwP.gif" alt="Corazones">
+        <p style="font-size:25px; color:white;">Prometo hacerte feliz cada día 💖</p>
+        <div id="mensaje-form" style="display:flex; flex-direction:column; align-items:center; margin-top: 20px;"> `;
+    startFireworks();
+
     }
 
     function rechazar() {
