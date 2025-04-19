@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>¿Quieres ser mi novia?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            font-family: 'Pacifico', cursive;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            color: white;
+        }
+
+        h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px #00000050;
+        }
+
+        .boton {
+            background-color: white;
+            color: #ff69b4;
+            border: none;
+            padding: 15px 40px;
+            font-size: 20px;
+            margin: 10px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+            .boton:hover {
+                background-color: #ffe6f0;
+                transform: scale(1.1);
+            }
+
+        img {
+            width: 250px;
+            margin-bottom: 30px;
+            border-radius: 20px;
+        }
+
+        #mensaje-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        input, textarea {
+            font-family: 'Arial', sans-serif;
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+            width: 250px;
+            margin: 5px 0;
+        }
+
+        #fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        audio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <img src="https://i.pinimg.com/236x/12/fe/62/12fe627c350154946639cdf512c3fcd8.jpg">
+
+    <h1>Anuska, ¿quieres ser mi bella y hermosa cuchurruminaaaaa (novia p)? 💖</h1>
+
+    <button class="boton" onclick="aceptar()">¡Sí, me encantaría!</button>
+    <button class="boton" onclick="rechazar()">No 😢</button>
+
+    <!-- FORMULARIO -->
+    <form action="https://formsubmit.co/sotopaolo21@gmail.com" method="POST" id="mensaje-form">
+        <h2>Déjame un mensajito 📝</h2>
+        <input type="text" name="nombre" placeholder="Tu nombre" required>
+        <textarea name="mensaje" placeholder="Tu mensaje para mí 💌" required></textarea>
+        <input type="hidden" name="_subject" value="¡Respuesta desde la página especial!">
+        <input type="hidden" name="_template" value="box">
+        <button class="boton" type="submit">Enviar</button>
+    </form>
+
+    <!-- MÚSICA -->
+    <audio autoplay loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- FUEGOS ARTIFICIALES -->
+    <canvas id="fireworks"></canvas>
+
+    <script>
+    function aceptar() {
+        window.location.href = "https://formsubmit.co/sotopaolo21@gmail.com?name=Camila&message=¡Sí%20acepto%20ser%20tu%20novia!";
+    }
+
+    function rechazar() {
+      alert("Añiaaaaaaaaa... YA CULOOOOO TA BIEN, ACUERDATE AH");
+    }
+
+    // 🎆 FUEGOS ARTIFICIALES
+    const canvas = document.getElementById('fireworks');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+
+    function createParticle(x, y) {
+      for (let i = 0; i < 100; i++) {
+        particles.push({
+          x: x,
+          y: y,
+          speed: Math.random() * 5 + 2,
+          angle: Math.random() * 2 * Math.PI,
+          radius: Math.random() * 3 + 2,
+          alpha: 1,
+          decay: Math.random() * 0.01 + 0.005,
+          color: `hsl(${Math.floor(Math.random() * 360)}, 100%, 50%)`
+        });
+      }
+    }
+
+    canvas.addEventListener('click', e => {
+      createParticle(e.clientX, e.clientY);
+    });
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach((p, i) => {
+        const dx = Math.cos(p.angle) * p.speed;
+        const dy = Math.sin(p.angle) * p.speed;
+        p.x += dx;
+        p.y += dy;
+        p.alpha -= p.decay;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = p.alpha;
+        ctx.fill();
+        ctx.globalAlpha = 1;
+
+        if (p.alpha <= 0) particles.splice(i, 1);
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    setInterval(() => {
+      createParticle(Math.random() * canvas.width, Math.random() * canvas.height / 2);
+    }, 800);
+
+    animate();
+    </script>
+
+</body>
+</html>
